@@ -37,6 +37,7 @@ import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SniHandler;
 
 import io.kroxylicious.proxy.bootstrap.FilterChainFactory;
+import io.kroxylicious.proxy.config.ResourceMetadata;
 import io.kroxylicious.proxy.config.ServiceBasedPluginFactoryRegistry;
 import io.kroxylicious.proxy.config.TargetCluster;
 import io.kroxylicious.proxy.config.tls.Tls;
@@ -120,6 +121,7 @@ class KafkaProxyInitializerTest {
                 false,
                 (endpoint, sniHostname) -> bindingStage,
                 (virtualCluster, upstreamNodes) -> null,
+                new ResourceMetadata(null),
                 false,
                 Map.of());
         // When
@@ -140,6 +142,7 @@ class KafkaProxyInitializerTest {
                 false,
                 virtualClusterBindingResolver,
                 (virtualCluster, upstreamNodes) -> null,
+                new ResourceMetadata(null),
                 false,
                 Map.of());
         when(channelPipeline.addLast(plainChannelResolverCaptor.capture())).thenReturn(channelPipeline);
@@ -164,6 +167,7 @@ class KafkaProxyInitializerTest {
                 false,
                 virtualClusterBindingResolver,
                 (virtualCluster, upstreamNodes) -> null,
+                new ResourceMetadata(null),
                 false,
                 Map.of());
         when(channelPipeline.addLast(plainChannelResolverCaptor.capture())).thenReturn(channelPipeline);
@@ -189,6 +193,7 @@ class KafkaProxyInitializerTest {
                 tls,
                 (endpoint, sniHostname) -> bindingStage,
                 (virtualCluster, upstreamNodes) -> null,
+                new ResourceMetadata(null),
                 false,
                 Map.of());
 
@@ -214,6 +219,7 @@ class KafkaProxyInitializerTest {
                 tls,
                 (endpoint, sniHostname) -> bindingStage,
                 (virtualCluster, upstreamNodes) -> null,
+                new ResourceMetadata(null),
                 false,
                 Map.of());
 
@@ -235,6 +241,7 @@ class KafkaProxyInitializerTest {
                 tls,
                 (endpoint, sniHostname) -> bindingStage,
                 (virtualCluster, upstreamNodes) -> null,
+                new ResourceMetadata(null),
                 false,
                 Map.of());
 
@@ -257,6 +264,7 @@ class KafkaProxyInitializerTest {
                 tls,
                 (endpoint, sniHostname) -> bindingStage,
                 (virtualCluster, upstreamNodes) -> null,
+                new ResourceMetadata(null),
                 false,
                 Map.of(KafkaAuthnHandler.SaslMechanism.PLAIN, plainHandler));
 
@@ -278,6 +286,7 @@ class KafkaProxyInitializerTest {
                 tls,
                 (endpoint, sniHostname) -> bindingStage,
                 (virtualCluster, upstreamNodes) -> null,
+                new ResourceMetadata(null),
                 false,
                 Map.of());
 
@@ -312,6 +321,7 @@ class KafkaProxyInitializerTest {
                 true,
                 (endpoint, sniHostname) -> bindingStage,
                 (virtualCluster, upstreamNodes) -> null,
+                new ResourceMetadata(null),
                 false,
                 Map.of());
 
