@@ -7,6 +7,7 @@ Format `<github issue/pr number>: <short description>`.
 
 ## SNAPSHOT
 
+* [#1709](https://github.com/kroxylicious/kroxylicious/pull/1709) Deprecate the existing top level `filters` configuration property; add support for named `filterDefinitions`, which can be scoped to a cluster. 
 * [#1643](https://github.com/kroxylicious/kroxylicious/pull/1643) Improve Encryption DEK co-ordination across threads
 * [#1705](https://github.com/kroxylicious/kroxylicious/pull/1705) Replace usages of Contributor with new Plugin mechanism and delete Contributor
 
