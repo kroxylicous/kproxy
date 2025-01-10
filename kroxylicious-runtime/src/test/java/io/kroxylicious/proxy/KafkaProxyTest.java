@@ -154,7 +154,7 @@ class KafkaProxyTest {
     @Test
     void invalidConfigurationForFeatures() {
         Optional<Map<String, Object>> a = Optional.of(Map.of("a", "b"));
-        Configuration configuration = new Configuration(null, null, List.of(), null, false, a);
+        Configuration configuration = new Configuration(List.of(), null, null, false, null, null, a);
         Features features = Features.defaultFeatures();
         assertThatThrownBy(() -> {
             KafkaProxy.validate(configuration, features);
