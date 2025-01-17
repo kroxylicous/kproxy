@@ -24,7 +24,7 @@ virtualClusters: # <6>
 # ...
 ----
 <1> A list of named filter definitions.
-<2> A filter definition called `example`.
+<2> A filter definition called `example`. The definitions must each have a unique name.
 <3> The name of the filter class implementation for the `example` filter. Required.
 <4> The configuration for the `example` filter instance. Usually required.
 <5> The filters that should be used by default (it's possible to override this list on a per-virtual cluster).

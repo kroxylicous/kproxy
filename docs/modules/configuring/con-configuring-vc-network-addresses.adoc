@@ -26,7 +26,7 @@ The provider supports both cleartext and TLS downstream connections.
 
 .Example broker address configuration
 [source,yaml]
-[id='con-basic-structure-{context}']
+[id='con-networkAddressProvider-{context}']
 .Outline structure of a Kroxylicious configuration
 [source,yaml]
 ----

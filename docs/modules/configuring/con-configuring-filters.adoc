@@ -3,7 +3,7 @@
 
 There is flexibility in how to configure filters. Consider the following example:
 
-[id='con-filterDefintions-defaultFilters-{context}']
+[id='con-filterDefinitions-defaultFilters-{context}']
 .`filterDefinitions`, `defaultFilters` and a virtual cluster's `filters` work together
 [source,yaml]
 ----
@@ -46,7 +46,7 @@ There is also a top level `filters` property, which accepts _anonymous_ filter d
 
 WARNING: `filters` is deprecated and will be removed in a future version of Kroxylicious. It is recommended to update existing configurations to use `filterDefinitions` instead.
 
-[id='con-filterDefintions-defaultFilters-{context}']
+[id='con-filters-{context}']
 .The deprecated `filters` property
 [source,yaml]
 ----
