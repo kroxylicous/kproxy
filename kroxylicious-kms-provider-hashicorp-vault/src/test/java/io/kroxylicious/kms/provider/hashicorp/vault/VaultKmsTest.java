@@ -12,7 +12,6 @@ import java.net.InetSocketAddress;
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.nio.charset.StandardCharsets;
-import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 import java.util.Base64;
 import java.util.HashSet;
@@ -20,8 +19,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
-
-import javax.net.ssl.SSLContext;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -140,20 +137,18 @@ class VaultKmsTest {
     }
 
     @Test
-    void testConnectionTimeout() throws NoSuchAlgorithmException {
+    void testConnectionTimeout() {
         var uri = URI.create("http://test:8080/v1/transit");
         Duration timeout = Duration.ofMillis(500);
-        VaultKms kms = new VaultKms(uri, "token", timeout, null);
-        SSLContext sslContext = SSLContext.getDefault();
-        var client = kms.createClient(sslContext);
-        assertThat(client.connectTimeout()).hasValue(timeout);
+        VaultKms kms = new VaultKms(uri, "token", timeout, builder -> builder);
+        assertThat(kms.getHttpClient().connectTimeout()).hasValue(timeout);
     }
 
     @Test
     void testRequestTimeoutConfiguredOnRequests() {
         var uri = URI.create("http://test:8080/v1/transit");
         Duration timeout = Duration.ofMillis(500);
-        VaultKms kms = new VaultKms(uri, "token", timeout, null);
+        VaultKms kms = new VaultKms(uri, "token", timeout, builder -> builder);
         HttpRequest build = kms.createVaultRequest().uri(uri).build();
         assertThat(build.timeout()).hasValue(timeout);
     }
@@ -171,7 +166,7 @@ class VaultKmsTest {
     @ParameterizedTest(name = "{0}")
     @MethodSource("acceptableVaultTransitEnginePaths")
     void acceptsVaultTransitEnginePaths(String name, URI uri, String expected) {
-        var kms = new VaultKms(uri, "token", Duration.ofMillis(500), null);
+        var kms = new VaultKms(uri, "token", Duration.ofMillis(500), builder -> builder);
         assertThat(kms.getVaultTransitEngineUri())
                 .extracting(URI::getPath)
                 .isEqualTo(expected);
@@ -191,7 +186,7 @@ class VaultKmsTest {
     @ParameterizedTest(name = "{0}")
     @MethodSource("unacceptableVaultTransitEnginePaths")
     void detectsUnacceptableVaultTransitEnginePaths(String name, URI uri) {
-        assertThatThrownBy(() -> new VaultKms(uri, "token", Duration.ZERO, null))
+        assertThatThrownBy(() -> new VaultKms(uri, "token", Duration.ZERO, builder -> builder))
                 .isInstanceOf(IllegalArgumentException.class);
 
     }
